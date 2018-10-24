@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, make_response
 
 import os
+import datetime
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -31,7 +32,7 @@ def poll():
         out.write(vote + '\n' )
         out.close()
         resp = make_response(redirect('/thankyou'))
-        resp.set_cookie('quest4dave', "banaan")
+        resp.set_cookie('quest4dave', "banaan", expires=datetime.datetime.now() + datetime.timedelta(days=30))
         return resp
     else:
         return redirect("/youalreadyvoted")
