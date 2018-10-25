@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, make_response
+from flask_bootstrap import Bootstrap
 
 import datetime
 
 app = Flask(__name__, static_url_path='/static')
+Bootstrap(app)
 
 poll_data = {
     'question': 'How many stars would you rate Incident Prevention?',

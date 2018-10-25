@@ -1,17 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{{ data.question }}</title>
-</head>
-<body>
-<h1>{{ data.question }}</h1>
-<form action="/poll">
-  {% for e in data.fields %}
-     <input type="radio" name="field" value="{{ e }}"> {{ e }}<br>
-  {% endfor %}
-  <input type="submit" value="Vote" />
-</form>
-<br/>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ request.url }}"/>
-</body>
-</html>
+{% extends "bootstrap/base.html" %}
+{% block title %}{{ data.question }}{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+  <div class="row">
+    <div class="page-header text-center">
+      <h1>Quest4Dave Poll</h1>      
+    </div>
+  </div>
+  <div class="row">
+    <h1>{{ data.question }}</h1>
+    <h2>Your feedback please...</h2>
+  </div>
+  <div class="row">
+    <p>Five is the highest possible rating.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+    <form action="/poll">
+      {% for e in data.fields %}
+        <label class="radio-inline">
+          <input type="radio" name="field" id="inlineRadio{{e}}" value="{{e}}"> {{e}}
+        </label>
+      {% endfor %}
+      <button type="submit" class="btn btn-block btn-primary">Vote</button>
+    </form>
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+      <br>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ request.url }}"/>
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-3">
+    </div>
+  </div>
+</div>
+
+
+  {% endblock %}
