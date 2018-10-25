@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}{{ data.question }}{% endblock %}
+{% block title %}Q4D Poll - {{data.subject}}{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-fixed-top">
@@ -15,8 +15,9 @@
     </div>
   </div>
   <div class="row">
-    <h1>{{ data.question }}</h1>
-    <h2>Your feedback please...</h2>
+    <h3>You are identified as a witness of the talk:</h3>
+    <h1>{{data.subject}}</h1>
+    <h3>Your feedback please...</h3>
   </div>
   <div class="row">
     <p>Five is the highest possible rating.</p>
@@ -32,6 +33,7 @@
           <input type="radio" name="field" id="inlineRadio{{e}}" value="{{e}}"> {{e}}
         </label>
       {% endfor %}
+      <br><br>
       <button type="submit" class="btn btn-block btn-primary">Vote</button>
     </form>
     </div>

@@ -1,19 +1,75 @@
-<!doctype html>
-<html>
-<head>
-<title>{{ data.question }}</title>
-</head>
-<body>
-<h1>Results for</h1>
-{{ data.question }}
+{% extends "bootstrap/base.html" %}
+{% block title %}Q4D Results - {{data.subject}}{% endblock %}
 
-<ul>
-{% for e in votes %}
-  <li>{{ e }} {{ votes[e] }}</li>
-{% endfor %}
-</ul>
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div class="container text-center">
 
+  <div class="row">
+    <div class="page-header text-center">
+      <h1>Quest4Dave Poll</h1>      
+    </div>
+  </div>
 
+  <div class="row">
+    <h1>The results for:</h1>
+    <h1>{{ data.subject }}</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Score</th>
+            <th scope="col"># Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for e in votes %}
+          <tr>
+            <td>{{ e }}</td>
+            <td>{{ votes [e] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Statistics</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Average</td>
+            <td>{{average}}</td>
+          </tr>
+          <tr>
+            <td>Total votes</td>
+            <td>{{number_of_votes}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+{% endblock %}

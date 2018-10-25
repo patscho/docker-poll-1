@@ -7,6 +7,7 @@ app = Flask(__name__, static_url_path='/static')
 Bootstrap(app)
 
 poll_data = {
+    'subject': 'Incident Prevention',
     'question': 'How many stars would you rate Incident Prevention?',
     'fields': ['1', '2', '3', '4', '5']
 }
@@ -65,8 +66,15 @@ def show_results():
         List2 = List.split(",")
         vote = List2.pop()
         votes[vote] += 1
+    total_score = 0
+    number_of_votes = 0
+    for score, times in votes.items():
+        total_score += int(score) * int(times)
+        number_of_votes += int(times)
+    average = round((total_score / number_of_votes), 2)
 
-    return render_template('results.html', data=poll_data, votes=votes)
+    return render_template('new_results.html', data=poll_data, votes=votes,
+                           average=average, number_of_votes=number_of_votes)
 
 
 if __name__ == "__main__":
