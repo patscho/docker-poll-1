@@ -5,15 +5,17 @@ import datetime
 app = Flask(__name__, static_url_path='/static')
 
 poll_data = {
-   'question' : 'How many stars would you rate Incident Prevention?',
-   'fields'   : ['1', '2', '3', '4', '5']
+    'question': 'How many stars would you rate Incident Prevention?',
+    'fields': ['1', '2', '3', '4', '5']
 }
 
 filename = 'data.txt'
 
+
 @app.route('/')
 def root():
     return render_template('poll.html', data=poll_data)
+
 
 def getcookie():
     name = request.cookies.get('quest4dave')
@@ -22,27 +24,32 @@ def getcookie():
     else:
         return False
 
+
 @app.route('/poll')
 def poll():
 
     vote = request.args.get('field')
     if not getcookie():
         out = open(filename, 'a')
-        out.write(vote + '\n' )
+        out.write(vote + '\n')
         out.close()
         resp = make_response(redirect('/thankyou'))
-        resp.set_cookie('quest4dave', "banaan", expires=datetime.datetime.now() + datetime.timedelta(days=30))
+        resp.set_cookie('quest4dave', "banaan", expires=datetime.datetime.now()
+                        + datetime.timedelta(days=30))
         return resp
     else:
         return redirect("/youalreadyvoted")
+
 
 @app.route('/thankyou')
 def thankyou():
     return render_template('thankyou.html', data=poll_data)
 
+
 @app.route('/youalreadyvoted')
 def alreadyvoted():
     return render_template('alreadyvoted.html', data=poll_data)
+
 
 @app.route('/results')
 def show_results():
@@ -59,5 +66,6 @@ def show_results():
 
     return render_template('results.html', data=poll_data, votes=votes)
 
+
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
